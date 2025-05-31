@@ -6,6 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Beneficio;
 
+
+/**
+ * @OA\Info(
+ *     title="Kuantaz API",
+ *     version="1.0.0",
+ *     description="This is the API documentation for the Kuantaz challenge."
+ * )
+ */
 class BeneficioController extends Controller
 {
     public function index()
@@ -13,6 +21,39 @@ class BeneficioController extends Controller
         return response()->json(['ok' => true]);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/analisis-beneficios",
+     *     tags={"Beneficios"},
+     *     summary="Obtener análisis de beneficios",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de beneficios agrupados por año",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 @OA\Property(property="año", type="integer"),
+     *                 @OA\Property(property="total_monto", type="number"),
+     *                 @OA\Property(property="total_beneficios", type="integer"),
+     *                 @OA\Property(
+     *                     property="beneficios",
+     *                     type="array",
+     *                     @OA\Items(
+     *                         @OA\Property(property="id_programa", type="integer"),
+     *                         @OA\Property(property="monto", type="number"),
+     *                         @OA\Property(property="fecha", type="string"),
+     *                         @OA\Property(property="ficha", type="object",
+     *                             @OA\Property(property="nombre", type="string"),
+     *                             @OA\Property(property="descripcion", type="string"),
+     *                             @OA\Property(property="categoria", type="string")
+     *                         )
+     *                     )
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function analisis()
     {
         $beneficios = Beneficio::with(['filtro.ficha'])->get();

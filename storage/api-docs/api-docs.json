@@ -1,0 +1,82 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Kuantaz API",
+        "description": "This is the API documentation for the Kuantaz challenge.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/analisis-beneficios": {
+            "get": {
+                "tags": [
+                    "Beneficios"
+                ],
+                "summary": "Obtener análisis de beneficios",
+                "operationId": "984a70935cb919cbe4e314d8f3ff4db2",
+                "responses": {
+                    "200": {
+                        "description": "Lista de beneficios agrupados por año",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "año": {
+                                                "type": "integer"
+                                            },
+                                            "total_monto": {
+                                                "type": "number"
+                                            },
+                                            "total_beneficios": {
+                                                "type": "integer"
+                                            },
+                                            "beneficios": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "id_programa": {
+                                                            "type": "integer"
+                                                        },
+                                                        "monto": {
+                                                            "type": "number"
+                                                        },
+                                                        "fecha": {
+                                                            "type": "string"
+                                                        },
+                                                        "ficha": {
+                                                            "properties": {
+                                                                "nombre": {
+                                                                    "type": "string"
+                                                                },
+                                                                "descripcion": {
+                                                                    "type": "string"
+                                                                },
+                                                                "categoria": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Beneficios",
+            "description": "Beneficios"
+        }
+    ]
+}

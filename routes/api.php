@@ -9,8 +9,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// Route::get('/analisis-beneficios', [BeneficioController::class, 'analisis']);
-Route::get('/analisis-beneficios', [BeneficioController::class, 'index']);
+Route::get('/analisis-beneficios', [BeneficioController::class, 'analisis']);
+// Route::get('/analisis-beneficios', [BeneficioController::class, 'index']);
 
 Route::get('/debug-beneficios', function () {
     $beneficios = Http::get('https://run.mocky.io/v3/8f75c4b5-ad90-49bb-bc52-f1fc0b4aad02')->json();

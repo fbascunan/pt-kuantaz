@@ -6,6 +6,108 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/processed-benefits": {
+            "get": {
+                "tags": [
+                    "Benefits"
+                ],
+                "summary": "Get processed benefits grouped by year",
+                "operationId": "895d9a390cce6f3442504adae4229488",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "year": {
+                                                        "type": "integer",
+                                                        "example": 2023
+                                                    },
+                                                    "total_monto_anual": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 150000.5
+                                                    },
+                                                    "num_beneficios": {
+                                                        "type": "integer",
+                                                        "example": 5
+                                                    },
+                                                    "beneficios": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id_programa": {
+                                                                    "type": "integer",
+                                                                    "example": 147
+                                                                },
+                                                                "monto": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "example": 40656
+                                                                },
+                                                                "fecha_recepcion": {
+                                                                    "type": "string",
+                                                                    "example": "09/11/2023"
+                                                                },
+                                                                "fecha": {
+                                                                    "type": "string",
+                                                                    "format": "date",
+                                                                    "example": "2023-11-09"
+                                                                },
+                                                                "ano": {
+                                                                    "type": "integer",
+                                                                    "example": 2023
+                                                                },
+                                                                "view": {
+                                                                    "type": "boolean",
+                                                                    "example": true
+                                                                },
+                                                                "ficha": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": 922
+                                                                        },
+                                                                        "nombre": {
+                                                                            "type": "string",
+                                                                            "example": "Emprende"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error or failed to fetch external data"
+                    }
+                }
+            }
+        },
         "/api/analisis-beneficios": {
             "get": {
                 "tags": [
@@ -74,6 +176,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Benefits",
+            "description": "Benefits"
+        },
         {
             "name": "Beneficios",
             "description": "Beneficios"

@@ -147,7 +147,7 @@ class BeneficioController extends Controller
             }
 
             // Group benefits by year
-            $beneficiosByYear = $processedBeneficios->groupBy('year');
+            $beneficiosByYear = $processedBeneficios->groupBy('ano');
 
             $resultData = $beneficiosByYear->map(function ($yearBeneficios, $year) {
                 // Number of benefits per year

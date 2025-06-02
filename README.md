@@ -1,58 +1,127 @@
+# Prueba Técnica Kuantaz
 
-## Challenge
+¡Bienvenido! Este repositorio contiene la solución a la prueba técnica de Kuantaz. A continuación, encontrarás toda la información relevante sobre el desafío, la arquitectura, el uso y la documentación de la API desarrollada.
 
-Prueba técnica Kuantaz
-Lea detenidamente las instrucciones y síguelas al pie de la letra.
-Consultar los siguientes endpoint
-● Beneficios
-● Filtros
-● Fichas
-Explicación:
-El endpoint beneficios, trae todos los beneficios de un usuario que ha recibido
-por años, estos beneficios trae un monto y una fecha.
-El endpoint filtros, trae la información de cada beneficio, en él podrás
-encontrar los montos mínimos , máximos y el id de la ficha.
-El endpoint Fichas, trae la información de una ficha en específico, cada
-beneficio tiene una ficha.
+## Descripción del Desafío
 
-La relación es: un beneficio tiene un filtro y un filtro tiene una ficha.
-Se solicita un endpoint que contenga la siguiente información:
-1. Beneficios ordenados por años.
+Se solicita implementar un endpoint que procese información proveniente de tres fuentes externas:
+
+- **Beneficios:** Lista de beneficios recibidos por un usuario a lo largo de los años, cada uno con monto y fecha.
+- **Filtros:** Información de cada beneficio, incluyendo montos mínimos, máximos y el id de la ficha asociada.
+- **Fichas:** Detalles de cada ficha, asociada a un beneficio a través del filtro.
+
+### Requerimientos del Endpoint
+
+El endpoint debe retornar:
+
+1. Beneficios ordenados por año (de mayor a menor).
 2. Monto total por año.
-3. número de beneficios por año.
-4. Filtrar solo los beneficios que cumplan los montos máximos y mínimos.
-5. Cada beneficio debe traer su ficha.
-6. Se debe ordenar por año, de mayor a menor.
+3. Número de beneficios por año.
+4. Solo los beneficios que cumplan con los montos máximos y mínimos definidos en los filtros.
+5. Cada beneficio debe incluir su ficha correspondiente.
 
-puedes ver como debe quedar en el siguiente LINK
+## Solución Propuesta
 
-Suma Puntos si:
-● Crear documentación con Swagger.
-● Uso de las Collection de Laravel
-● Crear archivo Postman u otro.
-● Test unitarios
+La solución implementa un endpoint RESTful en Laravel que:
 
-No olvide de enviar el enlace público del repositorio.
-Buena suerte!!
+- Consume los tres endpoints externos.
+- Procesa y filtra los datos utilizando las potentes **Collections** de Laravel.
+- Agrupa y ordena los beneficios por año, calculando totales y cantidades.
+- Adjunta la información de la ficha a cada beneficio.
+- Expone la documentación de la API mediante **Swagger**.
+- Incluye pruebas unitarias y un archivo de colección para Postman.
 
-## About Laravel
+## Instalación y Ejecución
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. **Clonar el repositorio:**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd pt-kuantaz
+   ```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. **Instalar dependencias:**
 
-## Learning Laravel
+   ```bash
+   composer install
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. **Configurar variables de entorno:**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+   Copia el archivo `.env.example` a `.env` y configura los valores necesarios.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Ejecutar migraciones (si aplica):**
+
+   ```bash
+   php artisan migrate
+   ```
+
+5. **Levantar el servidor de desarrollo:**
+
+   ```bash
+   php artisan serve
+   ```
+
+## Documentación de la API
+
+La documentación interactiva está disponible mediante **Swagger**. Accede a ella en:
+
+```
+http://localhost:8000/api/documentation
+```
+
+Aquí podrás explorar los endpoints, sus parámetros y respuestas.
+
+## Pruebas Unitarias
+
+Para ejecutar los tests:
+
+```bash
+php artisan test
+```
+
+## Colección de Postman
+
+En la raíz del proyecto encontrarás el archivo `Kuantaz.postman_collection.json`.
+
+### ¿Cómo usar la colección?
+
+1. Abre Postman.
+2. Haz clic en "Importar" y selecciona el archivo `Kuantaz.postman_collection.json`.
+3. Una vez importada, podrás ver y ejecutar fácilmente las peticiones a los endpoints documentados.
+4. Recuerda ajustar la variable de entorno `base_url` si es necesario (por ejemplo, `http://localhost:8000`).
+
+Esto te permitirá probar rápidamente todas las funcionalidades de la API y validar los requisitos del desafío.
+
+## Tecnologías Utilizadas
+
+- **Laravel** (Framework PHP)
+- **Swagger/OpenAPI** (Documentación de API)
+- **PHPUnit** (Pruebas)
+- **Postman** (Pruebas manuales de API)
+
+## Estructura del Proyecto
+
+- `app/Http/Controllers/Api/BeneficioController.php`: Lógica principal del endpoint solicitado.
+- `routes/api.php`: Definición de rutas de la API.
+- `tests/`: Pruebas unitarias y de integración.
+
+## Consideraciones
+
+- Se hace uso intensivo de las **Collections** de Laravel para un procesamiento eficiente y elegante de los datos.
+- El endpoint está protegido contra errores en la obtención de datos externos.
+- La documentación es clara y accesible para facilitar la integración y pruebas.
+
+## Contacto
+
+Para cualquier consulta o sugerencia, no dudes en contactarme.
+
+---
+
+¡Gracias por la oportunidad y el tiempo dedicado a revisar esta solución!
+

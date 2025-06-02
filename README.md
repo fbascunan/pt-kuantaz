@@ -14,11 +14,12 @@ Se solicita implementar un endpoint que procese información proveniente de tres
 
 El endpoint debe retornar:
 
-1. Beneficios ordenados por año (de mayor a menor).
+1. Beneficios ordenados por años.
 2. Monto total por año.
-3. Número de beneficios por año.
-4. Solo los beneficios que cumplan con los montos máximos y mínimos definidos en los filtros.
-5. Cada beneficio debe incluir su ficha correspondiente.
+3. número de beneficios por año.
+4. Filtrar solo los beneficios que cumplan los montos máximos y mínimos.
+5. Cada beneficio debe traer su ficha.
+6. Se debe ordenar por año, de mayor a menor.
 
 ## Solución Propuesta
 

@@ -45,23 +45,7 @@ La solución implementa un endpoint RESTful en Laravel que:
    ```bash
    composer install
    ```
-
-3. **Configurar variables de entorno:**
-
-   Copia el archivo `.env.example` a `.env` y configura los valores necesarios.
-
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-
-4. **Ejecutar migraciones (si aplica):**
-
-   ```bash
-   php artisan migrate
-   ```
-
-5. **Levantar el servidor de desarrollo:**
+3. **Levantar el servidor de desarrollo:**
 
    ```bash
    php artisan serve
@@ -72,7 +56,7 @@ La solución implementa un endpoint RESTful en Laravel que:
 La documentación interactiva está disponible mediante **Swagger**. Accede a ella en:
 
 ```
-http://localhost:8000/api/documentation
+http://pt-kuantaz.test/api/documentation
 ```
 
 Aquí podrás explorar los endpoints, sus parámetros y respuestas.
@@ -94,7 +78,6 @@ En la raíz del proyecto encontrarás el archivo `Kuantaz.postman_collection.jso
 1. Abre Postman.
 2. Haz clic en "Importar" y selecciona el archivo `Kuantaz.postman_collection.json`.
 3. Una vez importada, podrás ver y ejecutar fácilmente las peticiones a los endpoints documentados.
-4. Recuerda ajustar la variable de entorno `base_url` si es necesario (por ejemplo, `http://localhost:8000`).
 
 Esto te permitirá probar rápidamente todas las funcionalidades de la API y validar los requisitos del desafío.
 

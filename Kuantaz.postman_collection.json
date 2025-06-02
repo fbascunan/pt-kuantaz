@@ -1,0 +1,51 @@
+{
+  "info": {
+    "_postman_id": "b1e1e1e1-1111-2222-3333-444455556666",
+    "name": "Kuantaz API",
+    "description": "Colección para probar endpoint de la Prueba Técnica Kuantaz.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Obtener Beneficios Procesados por Año",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/beneficios-por-ano",
+          "host": ["{{base_url}}"],
+          "path": ["api", "beneficios-por-ano"]
+        },
+        "description": "Devuelve los beneficios procesados, agrupados y ordenados por año, con totales y ficha asociada."
+      },
+      "response": [
+        {
+          "name": "Ejemplo de respuesta 200",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/beneficios-por-ano",
+              "host": ["{{base_url}}"],
+              "path": ["api", "beneficios-por-ano"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {"key": "Content-Type", "value": "application/json"}
+          ],
+          "body": "{\n  \"code\": 200,\n  \"success\": true,\n  \"data\": [\n    {\n      \"year\": 2023,\n      \"monto_total_anual\": 150000.5,\n      \"num\": 5,\n      \"beneficios\": [\n        {\n          \"id_programa\": 147,\n          \"monto\": 40656,\n          \"fecha_recepcion\": \"09/11/2023\",\n          \"fecha\": \"2023-11-09\",\n          \"year\": 2023,\n          \"view\": true,\n          \"ficha\": {\n            \"id\": 922,\n            \"nombre\": \"Emprende\"\n          }\n        }\n      ]\n    }\n  ]\n}"
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    }
+  ]
+}

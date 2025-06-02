@@ -9,9 +9,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/analisis-beneficios', [BeneficioController::class, 'analisis']);
-// Route::get('/analisis-beneficios', [BeneficioController::class, 'index']);
-Route::get('/processed-benefits', [BeneficioController::class, 'getBeneficiosPerYear']);
 Route::get('/beneficios-por-ano', [BeneficioController::class, 'getBeneficiosPerYear']);
 
 

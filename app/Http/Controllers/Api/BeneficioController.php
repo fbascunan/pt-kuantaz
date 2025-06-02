@@ -13,7 +13,7 @@ use App\Models\Beneficio;
  * @OA\Info(
  *     title="Kuantaz API",
  *     version="1.0.0",
- *     description="This is the API documentation for the Kuantaz challenge."
+ *     description="Documentación de la API para la prueba técnica Kuantaz."
  * )
  */
 class BeneficioController extends Controller
@@ -25,51 +25,51 @@ class BeneficioController extends Controller
 
     /**
      * @OA\Get(
-     * path="/api/processed-benefits",
-     * summary="Get processed benefits grouped by year",
-     * tags={"Benefits"},
-     * @OA\Response(
-     * response=200,
-     * description="Successful operation",
-     * @OA\JsonContent(
-     * type="object",
-     * @OA\Property(property="code", type="integer", example=200),
-     * @OA\Property(property="success", type="boolean", example=true),
-     * @OA\Property(
-     * property="data",
-     * type="array",
-     * @OA\Items(
-     * type="object",
-     * @OA\Property(property="year", type="integer", example=2023),
-     * @OA\Property(property="monto_total_anual", type="number", format="float", example=150000.50),
-     * @OA\Property(property="num", type="integer", example=5),
-     * @OA\Property(
-     * property="beneficios",
-     * type="array",
-     * @OA\Items(
-     * type="object",
-     * @OA\Property(property="id_programa", type="integer", example=147),
-     * @OA\Property(property="monto", type="number", format="float", example=40656),
-     * @OA\Property(property="fecha_recepcion", type="string", example="09/11/2023"),
-     * @OA\Property(property="fecha", type="string", format="date", example="2023-11-09"),
-     * @OA\Property(property="year", type="integer", example=2023),
-     * @OA\Property(property="view", type="boolean", example=true),
-     * @OA\Property(
-     * property="ficha",
-     * type="object",
-     * @OA\Property(property="id", type="integer", example=922),
-     * @OA\Property(property="nombre", type="string", example="Emprende"),
-     * )
-     * )
-     * )
-     * )
-     * )
-     * )
-     * ),
-     * @OA\Response(
-     * response=500,
-     * description="Internal server error or failed to fetch external data"
-     * )
+     *     path="/api/beneficios-por-ano",
+     *     summary="Obtener beneficios procesados agrupados por año",
+     *     tags={"Beneficios"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="code", type="integer", example=200, description="Código de estado HTTP"),
+     *             @OA\Property(property="success", type="boolean", example=true, description="Indica si la operación fue exitosa"),
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     @OA\Property(property="year", type="integer", example=2023, description="Año de los beneficios"),
+     *                     @OA\Property(property="monto_total_anual", type="number", format="float", example=150000.50, description="Monto total de beneficios en el año"),
+     *                     @OA\Property(property="num", type="integer", example=5, description="Número de beneficios en el año"),
+     *                     @OA\Property(
+     *                         property="beneficios",
+     *                         type="array",
+     *                         @OA\Items(
+     *                             type="object",
+     *                             @OA\Property(property="id_programa", type="integer", example=147, description="ID del programa"),
+     *                             @OA\Property(property="monto", type="number", format="float", example=40656, description="Monto del beneficio"),
+     *                             @OA\Property(property="fecha_recepcion", type="string", example="09/11/2023", description="Fecha de recepción del beneficio (formato DD/MM/YYYY)"),
+     *                             @OA\Property(property="fecha", type="string", format="date", example="2023-11-09", description="Fecha del beneficio (formato YYYY-MM-DD)"),
+     *                             @OA\Property(property="year", type="integer", example=2023, description="Año del beneficio"),
+     *                             @OA\Property(property="view", type="boolean", example=true, description="Indica si el beneficio es visible"),
+     *                             @OA\Property(
+     *                                 property="ficha",
+     *                                 type="object",
+     *                                 @OA\Property(property="id", type="integer", example=922, description="ID de la ficha"),
+     *                                 @OA\Property(property="nombre", type="string", example="Emprende", description="Nombre de la ficha")
+     *                             )
+     *                         )
+     *                     )
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error interno del servidor o fallo al obtener datos externos"
+     *     )
      * )
      */
     public function getBeneficiosPerYear()
@@ -89,7 +89,7 @@ class BeneficioController extends Controller
 
 
         try {
-            // Fetch data from all endpoints
+            // Fetch data from all endpoints, fallback to DB if not reachable
             $beneficiosResponse = Http::get($this->beneficiosUrl);
             $filtrosResponse = Http::get($this->filtrosUrl);
             $fichasResponse = Http::get($this->fichasUrl);
@@ -182,77 +182,4 @@ class BeneficioController extends Controller
         }
     }
 
-    public function index()
-    {
-        return response()->json(['ok' => true]);
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/api/analisis-beneficios",
-     *     tags={"Beneficios"},
-     *     summary="Obtener análisis de beneficios",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Lista de beneficios agrupados por año",
-     *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(
-     *                 @OA\Property(property="año", type="integer"),
-     *                 @OA\Property(property="total_monto", type="number"),
-     *                 @OA\Property(property="total_beneficios", type="integer"),
-     *                 @OA\Property(
-     *                     property="beneficios",
-     *                     type="array",
-     *                     @OA\Items(
-     *                         @OA\Property(property="id_programa", type="integer"),
-     *                         @OA\Property(property="monto", type="number"),
-     *                         @OA\Property(property="fecha", type="string"),
-     *                         @OA\Property(property="ficha", type="object",
-     *                             @OA\Property(property="nombre", type="string"),
-     *                             @OA\Property(property="descripcion", type="string"),
-     *                             @OA\Property(property="categoria", type="string")
-     *                         )
-     *                     )
-     *                 )
-     *             )
-     *         )
-     *     )
-     * )
-     */
-    public function analisis()
-    {
-        $beneficios = Beneficio::with(['filtro.ficha'])->get();
-
-        $filtrados = $beneficios->filter(function ($b) {
-            if (!$b->filtro) return false;
-            return $b->monto >= $b->filtro->min && $b->monto <= $b->filtro->max;
-        });
-
-        $grouped = $filtrados->groupBy(function ($b) {
-            return \Carbon\Carbon::parse($b->fecha)->format('Y');
-        })->sortKeysDesc();
-
-        $resultado = $grouped->map(function ($items, $year) {
-            return [
-                'anio' => $year,
-                'monto_total' => $items->sum('monto'),
-                'total_beneficios' => $items->count(),
-                'beneficios' => $items->map(function ($b) {
-                    return [
-                        'monto' => $b->monto,
-                        'fecha' => $b->fecha,
-                        'ficha' => [
-                            'nombre' => $b->filtro->ficha->nombre ?? null,
-                            'url' => $b->filtro->ficha->url ?? null,
-                            'categoria' => $b->filtro->ficha->categoria ?? null,
-                            'descripcion' => $b->filtro->ficha->descripcion ?? null,
-                        ],
-                    ];
-                })->values(),
-            ];
-        })->values();
-
-        return response()->json($resultado);
-    }
 }

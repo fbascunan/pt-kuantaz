@@ -2,29 +2,31 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Kuantaz API",
-        "description": "This is the API documentation for the Kuantaz challenge.",
+        "description": "Documentación de la API para la prueba técnica Kuantaz.",
         "version": "1.0.0"
     },
     "paths": {
-        "/api/processed-benefits": {
+        "/api/beneficios-por-ano": {
             "get": {
                 "tags": [
-                    "Benefits"
+                    "Beneficios"
                 ],
-                "summary": "Get processed benefits grouped by year",
-                "operationId": "895d9a390cce6f3442504adae4229488",
+                "summary": "Obtener beneficios procesados agrupados por año",
+                "operationId": "f1cd9acef499ca13bf889b2617ff9b6d",
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Operación exitosa",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "code": {
+                                            "description": "Código de estado HTTP",
                                             "type": "integer",
                                             "example": 200
                                         },
                                         "success": {
+                                            "description": "Indica si la operación fue exitosa",
                                             "type": "boolean",
                                             "example": true
                                         },
@@ -33,15 +35,18 @@
                                             "items": {
                                                 "properties": {
                                                     "year": {
+                                                        "description": "Año de los beneficios",
                                                         "type": "integer",
                                                         "example": 2023
                                                     },
-                                                    "total_monto_anual": {
+                                                    "monto_total_anual": {
+                                                        "description": "Monto total de beneficios en el año",
                                                         "type": "number",
                                                         "format": "float",
                                                         "example": 150000.5
                                                     },
-                                                    "num_beneficios": {
+                                                    "num": {
+                                                        "description": "Número de beneficios en el año",
                                                         "type": "integer",
                                                         "example": 5
                                                     },
@@ -50,38 +55,46 @@
                                                         "items": {
                                                             "properties": {
                                                                 "id_programa": {
+                                                                    "description": "ID del programa",
                                                                     "type": "integer",
                                                                     "example": 147
                                                                 },
                                                                 "monto": {
+                                                                    "description": "Monto del beneficio",
                                                                     "type": "number",
                                                                     "format": "float",
                                                                     "example": 40656
                                                                 },
                                                                 "fecha_recepcion": {
+                                                                    "description": "Fecha de recepción del beneficio (formato DD/MM/YYYY)",
                                                                     "type": "string",
                                                                     "example": "09/11/2023"
                                                                 },
                                                                 "fecha": {
+                                                                    "description": "Fecha del beneficio (formato YYYY-MM-DD)",
                                                                     "type": "string",
                                                                     "format": "date",
                                                                     "example": "2023-11-09"
                                                                 },
-                                                                "ano": {
+                                                                "year": {
+                                                                    "description": "Año del beneficio",
                                                                     "type": "integer",
                                                                     "example": 2023
                                                                 },
                                                                 "view": {
+                                                                    "description": "Indica si el beneficio es visible",
                                                                     "type": "boolean",
                                                                     "example": true
                                                                 },
                                                                 "ficha": {
                                                                     "properties": {
                                                                         "id": {
+                                                                            "description": "ID de la ficha",
                                                                             "type": "integer",
                                                                             "example": 922
                                                                         },
                                                                         "nombre": {
+                                                                            "description": "Nombre de la ficha",
                                                                             "type": "string",
                                                                             "example": "Emprende"
                                                                         }
@@ -103,83 +116,13 @@
                         }
                     },
                     "500": {
-                        "description": "Internal server error or failed to fetch external data"
-                    }
-                }
-            }
-        },
-        "/api/analisis-beneficios": {
-            "get": {
-                "tags": [
-                    "Beneficios"
-                ],
-                "summary": "Obtener análisis de beneficios",
-                "operationId": "984a70935cb919cbe4e314d8f3ff4db2",
-                "responses": {
-                    "200": {
-                        "description": "Lista de beneficios agrupados por año",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "properties": {
-                                            "año": {
-                                                "type": "integer"
-                                            },
-                                            "total_monto": {
-                                                "type": "number"
-                                            },
-                                            "total_beneficios": {
-                                                "type": "integer"
-                                            },
-                                            "beneficios": {
-                                                "type": "array",
-                                                "items": {
-                                                    "properties": {
-                                                        "id_programa": {
-                                                            "type": "integer"
-                                                        },
-                                                        "monto": {
-                                                            "type": "number"
-                                                        },
-                                                        "fecha": {
-                                                            "type": "string"
-                                                        },
-                                                        "ficha": {
-                                                            "properties": {
-                                                                "nombre": {
-                                                                    "type": "string"
-                                                                },
-                                                                "descripcion": {
-                                                                    "type": "string"
-                                                                },
-                                                                "categoria": {
-                                                                    "type": "string"
-                                                                }
-                                                            },
-                                                            "type": "object"
-                                                        }
-                                                    },
-                                                    "type": "object"
-                                                }
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Error interno del servidor o fallo al obtener datos externos"
                     }
                 }
             }
         }
     },
     "tags": [
-        {
-            "name": "Benefits",
-            "description": "Benefits"
-        },
         {
             "name": "Beneficios",
             "description": "Beneficios"
